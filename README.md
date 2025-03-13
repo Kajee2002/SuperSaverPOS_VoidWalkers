@@ -2,7 +2,7 @@
 
 ## Overview
 
-SuperSaverPOS is a Point of Sale (POS) system designed for supermarket management. This application allows administrators to manage bills, add items to bills, and generate invoices in PDF format. The application also provides an admin panel for managing branch details, cashier information, and discount settings.
+SuperSaverPOS is a command-line-based Java program designed for supermarket billing management. It processes text-based input and output (CLI I/O), allowing administrators to manage bills, add items to bills, and generate invoices in PDF format. The program also includes functionality for managing branch details, cashier information, and discount settings.
 
 This project was developed as part of my **2nd semester Program Construction Module lab assignment**.
 
