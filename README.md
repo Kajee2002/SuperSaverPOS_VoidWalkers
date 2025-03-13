@@ -53,7 +53,18 @@ This project was developed as part of my **2nd semester Program Construction Mod
 
 ## Contributors
 
-- [![Static Badge](https://img.shields.io/badge/Kajatheepan-P?style=social&logo=github)](https://github.com/kajee2002)             
-- [![Static Badge](https://img.shields.io/badge/Nalina-g?style=social&logo=github)]()         
-- [![Static Badge](https://img.shields.io/badge/Thilaksan-t?style=social&logo=github)]()        
-- [![Static Badge](https://img.shields.io/badge/Babijana-j?style=social&logo=github)]()
+  > [![Static Badge](https://img.shields.io/badge/Kajatheepan-P?style=social&logo=github)](https://github.com/kajee2002)
+      
+  > [![Static Badge](https://img.shields.io/badge/Nalina-g?style=social&logo=github)]()
+
+  > [![Static Badge](https://img.shields.io/badge/Thilaksan-t?style=social&logo=github)]()
+
+  > [![Static Badge](https://img.shields.io/badge/Babijana-j?style=social&logo=github)]()  
+
+## Contributions
+
+> **Contributions are welcome!**
+
+The core functionality works, but there are some bugs and logical improvements that can be made. If you'd like to refine the code or enhance features, feel free to contribute!
+
+
