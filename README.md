@@ -52,4 +52,7 @@ This project was developed as part of our Program Construction Module lab assign
 
 ## Contributors
 
-[![Static Badge](https://img.shields.io/badge/kajatheepan-p?style=plastic&link=https%3A%2F%2Fgithub.com%2FKajee2002)](https://github.com/kajee2002) [![Static Badge](https://img.shields.io/badge/Nalina-G?style=plastic)]() [![Static Badge](https://img.shields.io/badge/Thilaksan-T?style=plastic)]() [![Static Badge](https://img.shields.io/badge/Babijana-J?style=plastic)]()
+- [![Static Badge](https://img.shields.io/badge/Kajatheepan-P?style=social&logo=github)](https://github.com/kajee2002)             
+- [![Static Badge](https://img.shields.io/badge/Nalina-g?style=social&logo=github)]()         
+- [![Static Badge](https://img.shields.io/badge/Thilaksan-t?style=social&logo=github)]()        
+- [![Static Badge](https://img.shields.io/badge/Babijana-j?style=social&logo=github)]()
