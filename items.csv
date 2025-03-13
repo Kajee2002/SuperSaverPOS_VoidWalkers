@@ -1,0 +1,11 @@
+ItemCode,Price,Weight/Size,ManufacturingDate,ExpiryDate,ManufacturerName
+101,2.50,1kg,2023-01-01,2024-01-01,SuperFarm
+102,1.99,500g,2023-02-01,2024-02-01,GreenMarket
+103,5.00,2kg,2023-03-01,2024-03-01,FreshFields
+104,3.75,750g,2023-04-01,2024-04-01,OrganicPlus
+105,4.25,1.5kg,2023-05-01,2024-05-01,HealthyHarvest
+106,2.95,600g,2023-06-01,2024-06-01,NatureBest
+107,6.00,2.5kg,2023-07-01,2024-07-01,GreenFarm
+108,3.20,1.2kg,2023-08-01,2024-08-01,FarmFresh
+109,1.75,400g,2023-09-01,2024-09-01,QuickMart
+110,7.50,3kg,2023-10-01,2024-10-01,AgroWorld
