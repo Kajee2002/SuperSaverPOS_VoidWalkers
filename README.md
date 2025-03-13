@@ -55,9 +55,9 @@ This project was developed as part of my **2nd semester Program Construction Mod
 
   > [![Static Badge](https://img.shields.io/badge/Kajatheepan-P?style=social&logo=github)](https://github.com/kajee2002)
       
-  > [![Static Badge](https://img.shields.io/badge/Nalina-g?style=social&logo=github)]()
+  > [![Static Badge](https://img.shields.io/badge/Nalina-g?style=social&logo=github)](https://github.com/nalinasai)
 
-  > [![Static Badge](https://img.shields.io/badge/Thilaksan-t?style=social&logo=github)]()
+  > [![Static Badge](https://img.shields.io/badge/Thilaksan-t?style=social&logo=github)](https://github.com/Thilaksan8)
 
   > [![Static Badge](https://img.shields.io/badge/Babijana-j?style=social&logo=github)]()  
 
