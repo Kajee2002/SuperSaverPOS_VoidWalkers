@@ -1,11 +1,22 @@
 package org.example;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.FileOutputStream;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class PosSystem {
-    private HashMap<Integer, Bill> completedBills = new HashMap<>();
-    private HashMap<Integer, Bill> pendingBills = new HashMap<>();
+    public HashMap<Integer, Bill> completedBills = new HashMap<>();
+    public HashMap<Integer, Bill> pendingBills = new HashMap<>();
+    private double totalSales = 0.0;
+    private double totalDiscounts = 0.0;
+    private double netRevenue = 0.0;
+    private int totalTransactions = 0;
+
 
     public void completeBill(int billNo,Bill bill){
         if(this.completedBills.containsKey(billNo)) {
@@ -115,7 +126,7 @@ public class PosSystem {
                 case 1:
                     bill.generateBill();
                     sys.completeBill(bill.billID,bill);
-                    break;
+                    return;
                 case 2:
                     sys.addBill(bill.billID, bill);
                     return;
@@ -125,5 +136,50 @@ public class PosSystem {
                     System.out.println("Invalid choice");
             }
         }
+    }
+
+    public void revenueReport(Scanner scanner){
+        System.out.print("Enter the startDate: (Enter in this format YYYY-MM-DD)\n->");
+        String startDateStr = scanner.nextLine();
+        System.out.print("Enter the endDate: (Enter in this format YYYY-MM-DD) \n->");
+        String endDateStr = scanner.nextLine();
+
+        LocalDate startDate = LocalDate.parse(startDateStr);
+        LocalDate endDate = LocalDate.parse(endDateStr);
+
+
+
+
+        this.completedBills.forEach((key,val)->{
+            //validate dates are correct in format & start date & end dates are correctly said
+            if(!val.date.isBefore(startDate) && !val.date.isAfter(endDate) ){
+                this.totalSales+= val.totalAmount;
+                this.totalDiscounts += val.totalDiscount;
+                this.netRevenue += val.totalAmount - val.totalDiscount;
+                this.totalTransactions ++;
+            }
+        });
+
+        String reportContent = "📜 Super-Saving Supermarket - Revenue Report\n" +
+                "📅 Date Range: " + startDateStr + " - " + endDateStr + "\n" +
+                "🛒 Total Sales (Before Discount): " + this.totalSales + " Rs\n" +
+                "💰 Total Discounts Given: " + this.totalDiscounts + " Rs\n" +
+                "💵 Net Revenue (After Discount): " + this.netRevenue + " Rs\n" +
+                "📄 Total Transactions Processed: " + this.totalTransactions;
+
+        System.out.println(reportContent);
+        String filename = "Revenue Report "+ startDateStr +" - "+endDateStr+".pdf";
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(filename));
+            document.open();
+            document.add(new Paragraph(reportContent));
+            document.close();
+            System.out.println("Report saved as " + filename);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

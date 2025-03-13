@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
+import java.time.LocalDate;
 
 public class Bill {
     private HashMap<String, Item> itemMap = new HashMap<>();
@@ -22,6 +23,8 @@ public class Bill {
     public String branchName;
     public int billID;
     public double discount;
+    public double totalDiscount;
+    public LocalDate date;
 
     Bill(String cashierName, String branchName, int billID, Double discount) {
         this.customerName = "Guest";
@@ -29,8 +32,10 @@ public class Bill {
         this.discount = discount;
         this.branchName = branchName;
         this.billID = billID;
+        this.date = LocalDate.now();
         String csvFilePath = "items.csv";
         loadItemsFromCSV(csvFilePath);
+
     }
 
     public void setCustomerName(String customerName) {
@@ -70,8 +75,8 @@ public class Bill {
         Item item = itemMap.get(itemCode);
         if (item != null) {
             double itemTotal = item.getNetPrice(quantity);
-            totalAmount += itemTotal;
-
+            this.totalAmount += itemTotal;
+            this.totalDiscount += itemTotal*discount/100;
             Vector<Object> thisItem = new Vector<>();
             thisItem.add(item.itemCode);
             thisItem.add(quantity);
@@ -86,34 +91,11 @@ public class Bill {
         }
     }
 
-    public void printBill() {
-        Date currDate = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String formattedDateTime = formatter.format(currDate);
-
-        System.out.println("\n----------------------------------------");
-        System.out.println("POS System - VoidWalkers SuperMarket");
-        System.out.println("Branch: " + this.branchName);
-        System.out.println("Cashier: " + this.cashierName);
-        System.out.println("Customer: " + this.customerName);
-        System.out.println("Date: " + formattedDateTime);
-        System.out.println("Bill ID: " + this.billID);
-        System.out.println("----------------------------------------");
-        System.out.printf("%-10s %-10s %-10s %s%n", "Item", "Quantity", "Unit Price", "Total");
-        System.out.println("----------------------------------------");
-
-        soldItems.forEach((obj) -> {
-            System.out.printf("%-10s %-10d %-10.2f %.2f%n", obj.get(0), obj.get(1), obj.get(2), obj.get(3));
-        });
-
-        System.out.println("----------------------------------------");
-        System.out.printf("%-30s %.2f Rs%n", "Total:", getTotalBill());
-        System.out.println("----------------------------------------");
-    }
-
     public double getTotalBill() {
         return totalAmount;
     }
+
+
 
     public void generateBill() {
         String filePath = "Bill" + this.billID + ".pdf";
@@ -130,19 +112,16 @@ public class Bill {
 
             // Invoice details
             Font detailFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Paragraph date = new Paragraph("Date: " + sdf.format(new Date()), detailFont);
-            Paragraph invoiceNumber = new Paragraph("Invoice No: INV-" + String.format("%03d", this.billID), detailFont);
-            document.add(date);
-            document.add(invoiceNumber);
-            document.add(new Paragraph("\n"));
-            Paragraph branchName = new Paragraph("Branch: " + this.branchName, detailFont);
-            Paragraph cashierName = new Paragraph("Cashier: " + this.cashierName, detailFont);
-            Paragraph customerName = new Paragraph("Customer: " + this.customerName, detailFont);
-            document.add(branchName);
-            document.add(cashierName);
-            document.add(customerName);
-            document.add(new Paragraph("\n"));
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+            String detailsText = "Date: " + this.date.toString() +" "+ sdf.format(new Date()) +
+                    "\nInvoice No: INV-" + String.format("%03d", this.billID)+
+                    "\nBranch: " + this.branchName+
+                    "\nCashier: " + this.cashierName+
+                    "\nCustomer: " + this.customerName+ "\n";
+
+            Paragraph detailsPara = new Paragraph(detailsText,detailFont);
+            document.add(detailsPara);
 
             // Table setup
             PdfPTable table = new PdfPTable(4);
@@ -183,12 +162,15 @@ public class Bill {
             });
             document.add(table);
 
-            Font boldFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14);
-            document.add(new Paragraph("Discount: " + String.format("%.2f", this.discount) + "%", boldFont));
-            Paragraph total = new Paragraph("Total Amount: " + String.format("%.2f Rs", this.totalAmount), new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
-            total.setAlignment(Element.ALIGN_RIGHT);
-            total.setSpacingBefore(10f);
-            document.add(total);
+            Font boldFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
+            String totalText = "Total : "+ String.format("%.2f Rs \n",this.totalAmount) +
+                    "Discount : " + String.format("%.2f ", this.discount) + "% \n"+
+                    "NetTotal : " + String.format("%.2f Rs \n", this.totalAmount - this.totalDiscount);
+            Paragraph totalPara = new Paragraph(totalText,boldFont);
+            totalPara.setAlignment(Element.ALIGN_RIGHT);
+            totalPara.setSpacingBefore(10f);
+            document.add(totalPara);
+
 
             Paragraph thanks = new Paragraph("Thank you for shopping with us!", new Font(Font.FontFamily.HELVETICA, 12));
             thanks.setAlignment(Element.ALIGN_CENTER);

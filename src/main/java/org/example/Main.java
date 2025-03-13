@@ -31,7 +31,7 @@ public class Main {
                     break;
                 case 3:
                     // Admin panel
-                    adminPanel(adminSession, scanner);
+                    adminPanel(adminSession, scanner,posSys);
                     break;
                 case 4:
                     // Exit
@@ -89,7 +89,7 @@ public class Main {
         }
     }
 
-    public static void adminPanel(AdminSession admin, Scanner scanner) {
+    public static void adminPanel(AdminSession admin, Scanner scanner,PosSystem sys) {
         String branchName = admin.getBranchName();
         String cashierName = admin.getCashierName();
         Double discount = admin.getDiscount();
@@ -98,7 +98,8 @@ public class Main {
             System.out.println("1. Change Branch Name");
             System.out.println("2. Change Cashier Name");
             System.out.println("3. Change Discount");
-            System.out.println("4. Return Menu");
+            System.out.println("4. Generate Revenue Report");
+            System.out.println("5. Return Menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -115,10 +116,18 @@ public class Main {
                     admin.setDiscount(scanner);
                     break;
                 case 4:
+                    sys.revenueReport(scanner);
+                    //generate revenue report
+
+                    break;
+
+                case 5:
                     return;
                 default:
                     System.out.println("Invalid choice");
             }
         }
     }
+
+
 }
