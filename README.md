@@ -53,7 +53,7 @@ This project was developed as part of my **2nd semester Program Construction Mod
 
 ## Contributors
 
-  > [![Static Badge](https://img.shields.io/badge/Kajatheepan-P?style=social&logo=github)](https://github.com/kajee2002)
+  > [![Static Badge](https://img.shields.io/badge/Kajatheepan-P?style=social&logo=github)](https://github.com/kajatheepan)
       
   > [![Static Badge](https://img.shields.io/badge/Nalina-g?style=social&logo=github)](https://github.com/nalinasai)
 
